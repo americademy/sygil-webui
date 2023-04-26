@@ -29,6 +29,7 @@ COPY ./.streamlit /sd/.streamlit
 COPY ./optimizedSD /sd/optimizedSD
 
 # Set the entrypoint
+RUN chmod +x /sd/entrypoint.sh
 ENTRYPOINT ["/sd/entrypoint.sh"]
 
 # Create .streamlit directory and set up credentials.toml
