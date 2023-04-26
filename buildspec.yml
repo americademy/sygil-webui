@@ -17,13 +17,13 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t sygil-webui:build-$CODEBUILD_BUILD_NUMBER .
-      - docker tag sygil-webui:build-$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/sygil-webui:build-$CODEBUILD_BUILD_NUMBER
-      - docker tag sygil-webui:build-$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/sygil-webui:latest
+      - docker build -t sygil-webui:$ENVIRONMENT-build-$CODEBUILD_BUILD_NUMBER .
+      - docker tag sygil-webui:$ENVIRONMENT-build-$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/sygil-webui:$ENVIRONMENT-build-$CODEBUILD_BUILD_NUMBER
+      - docker tag sygil-webui:$ENVIRONMENT-build-$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/sygil-webui:$ENVIRONMENT-latest
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/sygil-webui:build-$CODEBUILD_BUILD_NUMBER
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/sygil-webui:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/sygil-webui:$ENVIRONMENT-build-$CODEBUILD_BUILD_NUMBER
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/sygil-webui:$ENVIRONMENT-latest
